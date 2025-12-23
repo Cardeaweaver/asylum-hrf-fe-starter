@@ -27,7 +27,8 @@ const router = createBrowserRouter([
 
 export const App = () => {
   return (
-    <div className='font-serif w-[100vw] h-[100vh] m-0 flex-c justify-between align-centre text-center min-h-screen secondary-c'>
+    /*  removeD the fixed height and flex classes here */
+    <div className='app-container'>
       <RouterProvider router={router} />
     </div>
   );

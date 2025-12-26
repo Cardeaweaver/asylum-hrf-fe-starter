@@ -12,10 +12,10 @@ export const LandingPage = () => {
   const { downloadCSV } = useDownloadData();
 
   return (
-    <div className="flex flex-col w-full font-serif text-[#404037]">
+    <div className="flex flex-col w-full font-serif text-[#1e3a8a]">
       
       {/* 1. HERO SECTION */}
-      <section className="bg-[#404037] text-white py-20 px-4 text-center">
+      <section className="bg-[#1e3a8a] text-white py-20 px-4 text-center">
         <h1 className="text-6xl mb-6 font-normal">Asylum Office Grant Rate Tracker</h1>
         <h3 className="text-lg font-light max-w-4xl mx-auto leading-relaxed">
           The Asylum Office Grant Rate Tracker provides asylum seekers, researchers, policymakers, and the public an interactive tool to explore USCIS data on Asylum Office decisions.
@@ -43,13 +43,13 @@ export const LandingPage = () => {
         <div className="flex justify-center gap-4">
           <button 
             onClick={() => navigate('/graphs')} 
-            className="bg-[#666666] text-white px-6 py-2 text-sm hover:bg-black transition-all duration-300 hover:scale-105"
+            className="bg-[#3b82f6] text-white px-6 py-2 text-sm hover:bg-[#1e40af] transition-all duration-300 hover:scale-105"
           >
             View the Data
           </button>
           <button 
             onClick={() => downloadCSV()} 
-            className="bg-[#666666] text-white px-6 py-2 text-sm hover:bg-black transition-all duration-300 hover:scale-105"
+            className="bg-[#3b82f6] text-white px-6 py-2 text-sm hover:bg-[#1e40af] transition-all duration-300 hover:scale-105"
           >
             Download the Data
           </button>
@@ -57,7 +57,7 @@ export const LandingPage = () => {
       </section>
 
       {/* 4. MISSION SECTION */}
-      <section className="flex flex-col md:flex-row items-center justify-center py-20 px-10 gap-20 max-w-7xl mx-auto bg-white">
+      <section className="flex flex-col md:flex-row items-center justify-center py-20 px-10 gap-20 max-w-7xl mx-auto bg-white border-l-4 border-[#3b82f6]">
         <img src={paperStack} alt="Files" className="rounded-3xl shadow-2xl w-full md:w-1/2 h-[450px] object-cover" />
         <div className="md:w-1/2 text-xl text-gray-700 leading-relaxed font-light text-left">
           <p>Human Rights First has created a search tool to give you a user-friendly way to explore a data set of asylum decisions between FY 2016 and May 2021 by the USCIS Asylum Office...</p>
@@ -81,7 +81,7 @@ export const LandingPage = () => {
             <p className="text-sm px-6">The New York office's average grant rate was 6 times lower than San Francisco.</p>
           </div>
         </div>
-        <button className="bg-[#666666] text-white px-10 py-2 text-sm hover:bg-black mb-16 transition-all duration-300 hover:scale-105">
+        <button className="bg-[#3b82f6] text-white px-10 py-2 text-sm hover:bg-[#1e40af] mb-16 transition-all duration-300 hover:scale-105">
           Read More
         </button>
         <div>

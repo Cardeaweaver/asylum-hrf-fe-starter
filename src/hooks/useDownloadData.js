@@ -21,45 +21,77 @@ export const useDownloadData = () => {
   }
 
   const flattenObject = (obj, prefix = '') => {
-    if (obj) {
-      return Object.keys(obj).reduce((acc, key) => {
-        const pre = prefix.length ? `${prefix}.` : '';
-
-        if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
-          Object.assign(acc, flattenObject(obj[key], `${pre}${key}`));
-        } else if (Array.isArray(obj[key])) {
-          obj[key].forEach((item, index) => {
-            Object.assign(acc, flattenObject(item, `${pre}${key}[${index}]`));
-          });
-        } else {
-          acc[`${pre}${key}`] = obj[key];
-        }
-
-        return acc;
-      }, {});
+    if (!obj || typeof obj !== 'object') {
+      console.warn('flattenObject: obj is not a valid object:', obj);
+      return {}; // Return empty object instead of undefined
     }
+    
+    return Object.keys(obj).reduce((acc, key) => {
+      const pre = prefix.length ? `${prefix}.` : '';
+
+      if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+        Object.assign(acc, flattenObject(obj[key], `${pre}${key}`));
+      } else if (Array.isArray(obj[key])) {
+        obj[key].forEach((item, index) => {
+          Object.assign(acc, flattenObject(item, `${pre}${key}[${index}]`));
+        });
+      } else {
+        acc[`${pre}${key}`] = obj[key];
+      }
+
+      return acc;
+    }, {});
   };
 
   function downloadCSV() {
-    const flattenData = flattenObject(graphData);
-    const csvRows = [];
-    const headers = Object.keys(flattenData);
-    csvRows.push(headers.join(',')); // Add headers
+    try {
+      console.log('downloadCSV called, graphData:', graphData);
+      
+      if (!graphData || typeof graphData !== 'object') {
+        console.warn('No valid graph data available to download');
+        return;
+      }
 
-    const row = headers.map(header => JSON.stringify(flattenData[header], (key, value) => (value === null ? '' : value))).join(',');
-    csvRows.push(row); // Add the data row
+      console.log('Flattening data...');
+      const flattenData = flattenObject(graphData);
+      console.log('flattenData result:', flattenData, 'type:', typeof flattenData);
+      
+      if (!flattenData || typeof flattenData !== 'object') {
+        console.warn('flattenData is null/undefined or not an object');
+        return;
+      }
 
-    const csvString = csvRows.join('\n');
-    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+      const csvRows = [];
+      const headers = Object.keys(flattenData);
+      console.log('Headers:', headers);
+      
+      if (!headers || headers.length === 0) {
+        console.warn('No headers found for CSV download.');
+        return;
+      }
+      
+      csvRows.push(headers.join(',')); // Add headers
 
-    link.setAttribute('href', url);
-    link.setAttribute('download', filename);
-    link.style.visibility = 'hidden';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+      const row = headers.map(header => JSON.stringify(flattenData[header], (key, value) => (value === null ? '' : value))).join(',');
+      csvRows.push(row); // Add the data row
+
+      const csvString = csvRows.join('\n');
+      const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+
+      link.setAttribute('href', url);
+      link.setAttribute('download', filename);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      URL.revokeObjectURL(url);
+      console.log('CSV downloaded successfully');
+    } catch (error) {
+      console.error('Error downloading CSV:', error);
+    }
   }
 
   return { downloadCSV };

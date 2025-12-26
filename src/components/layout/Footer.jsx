@@ -2,7 +2,7 @@ import Logo from '../../assets/logo.png';
 
 export default function Footer() {
   return (
-    <footer className='flex flex-col w-full bg-[#404037] px-14 py-10 text-amber-50/80 font-serif'>
+    <footer className='flex flex-col w-full bg-[#1e3a8a] px-14 py-10 text-blue-50/80 font-serif'>
       
       {/* 1. TOP SECTION: LOGO AND ADDRESS */}
       <section className='flex flex-col items-center pb-8 border-b border-white/10'>
@@ -13,7 +13,7 @@ export default function Footer() {
         </div>
         
         <div className='footer-address flex flex-col items-center text-center space-y-1 text-sm'>
-          <p className="font-bold text-lg text-amber-50">Human Rights First</p>
+          <p className="font-bold text-lg text-blue-50">Human Rights First</p>
           <p>75 Broad St, 31st Floor</p>
           <p>New York, New York 10004 US</p>
           <p className='pt-4 text-xs opacity-60'>For Media Inquiries call 202-370-333</p>

@@ -1,47 +1,71 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import testData from '../data/test_data.json';
+// import testData from '../data/test_data.json'; // Removed to use live API
 import { useLocalStorage } from '../hooks/useLocalStorage.js';
 
 const AppContext = createContext({});
 
-/**
- * TODO: Ticket 2:
- * - Use axios to fetch the data
- * - Store the data
- * - Populate the graphs with the stored data
- */
 const useAppContextProvider = () => {
-  const [graphData, setGraphData] = useState(testData);
+  // Initialize with null or empty object instead of testData
+  const [graphData, setGraphData] = useState(null);
   const [isDataLoading, setIsDataLoading] = useState(false);
 
   useLocalStorage({ graphData, setGraphData });
 
+  // API base URL provided in requirements
+  const API_URL = 'https://asylum-be.onrender.com';
+
+  const fetchData = async () => {
+    try {
+      setIsDataLoading(true);
+      // Fetching fiscal and citizenship data from the API endpoints
+      const fiscalResponse = await axios.get(`${API_URL}/fiscalSummary`);
+      const citizenshipResponse = await axios.get(`${API_URL}/citizenshipSummary`);
+      
+      // Handle different response structures
+      const fiscalData = Array.isArray(fiscalResponse.data) ? fiscalResponse.data : fiscalResponse.data.data || [];
+      const citizenshipData = Array.isArray(citizenshipResponse.data) ? citizenshipResponse.data : citizenshipResponse.data.data || [];
+      
+      // Combine both datasets
+      const combinedData = {
+        yearResults: fiscalData,
+        citizenshipResults: citizenshipData
+      };
+      
+      console.log("Combined Data:", combinedData);
+      setGraphData(combinedData);
+    } catch (error) {
+      console.error("Error fetching asylum data:", error);
+    } finally {
+      setIsDataLoading(false);
+    }
+  };
+
   const getFiscalData = () => {
-    // TODO: Replace this with functionality to retrieve the data from the fiscalSummary endpoint
-    const fiscalDataRes = testData;
-    return fiscalDataRes;
+    // Returns the yearResults portion of the live data
+    return graphData?.yearResults || [];
   };
 
   const getCitizenshipResults = async () => {
-    // TODO: Replace this with functionality to retrieve the data from the citizenshipSummary endpoint
-    const citizenshipRes = testData.citizenshipResults;
-    return citizenshipRes;
+    // Returns the citizenshipResults portion of the live data
+    return graphData?.citizenshipResults || [];
   };
 
   const updateQuery = async () => {
     setIsDataLoading(true);
   };
 
-  const fetchData = async () => {
-    // TODO: fetch all the required data and set it to the graphData state
-  };
-
   const clearQuery = () => {
-    setGraphData({});
+    setGraphData(null);
   };
 
-  const getYears = () => graphData?.yearResults?.map(({ fiscal_year }) => Number(fiscal_year)) ?? [];
+  const getYears = () => 
+    graphData?.yearResults?.map(({ fiscal_year }) => Number(fiscal_year)) ?? [];
+
+  useEffect(() => {
+    // Automatically fetch data on initial load to populate graphs
+    fetchData();
+  }, []);
 
   useEffect(() => {
     if (isDataLoading) {
@@ -56,6 +80,8 @@ const useAppContextProvider = () => {
     updateQuery,
     clearQuery,
     getYears,
+    getFiscalData,
+    getCitizenshipResults,
   };
 };
 

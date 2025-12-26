@@ -30,12 +30,12 @@ export default function Footer() {
 
       {/* 2. NAVIGATION LINKS SECTION WITH HOVER */}
       <nav className='footer-links flex flex-wrap gap-10 justify-center pt-8 text-xs uppercase tracking-widest'>
-        <button className='transition-all duration-300 hover:text-white hover:scale-105'>About Us</button>
-        <button className='transition-all duration-300 hover:text-white hover:scale-105'>Contact Us</button>
-        <button className='transition-all duration-300 hover:text-white hover:scale-105'>Press</button>
-        <button className='transition-all duration-300 hover:text-white hover:scale-105'>Terms & Privacy</button>
-        <button className='transition-all duration-300 hover:text-white hover:scale-105'>Sign Up</button>
-        <button className='transition-all duration-300 hover:text-white hover:scale-105'>Careers</button>
+        <a href='https://www.humanrightsfirst.org/about' target='_blank' rel='noopener noreferrer' className='transition-all duration-300 hover:text-white hover:scale-105 cursor-pointer'>About Us</a>
+        <a href='https://www.humanrightsfirst.org/contact' target='_blank' rel='noopener noreferrer' className='transition-all duration-300 hover:text-white hover:scale-105 cursor-pointer'>Contact Us</a>
+        <a href='https://www.humanrightsfirst.org/press' target='_blank' rel='noopener noreferrer' className='transition-all duration-300 hover:text-white hover:scale-105 cursor-pointer'>Press</a>
+        <a href='https://www.humanrightsfirst.org/privacy' target='_blank' rel='noopener noreferrer' className='transition-all duration-300 hover:text-white hover:scale-105 cursor-pointer'>Terms & Privacy</a>
+        <a href='https://www.humanrightsfirst.org/signup' target='_blank' rel='noopener noreferrer' className='transition-all duration-300 hover:text-white hover:scale-105 cursor-pointer'>Sign Up</a>
+        <a href='https://www.humanrightsfirst.org/careers' target='_blank' rel='noopener noreferrer' className='transition-all duration-300 hover:text-white hover:scale-105 cursor-pointer'>Careers</a>
       </nav>
     </footer>
   );

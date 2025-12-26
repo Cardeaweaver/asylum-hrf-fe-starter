@@ -27,16 +27,34 @@ function LandingPageContent() {
       {/* 2. GRAPHS PREVIEW SECTION */}
       <section className="py-24 px-6 max-w-7xl mx-auto w-full">
         <div className="flex flex-col md:flex-row justify-around items-end gap-12 mb-12">
-          <div className="flex flex-col items-center">
-            <Image src={'/bar-graph.png'} alt="Bar Graph" className="h-56 w-auto mb-6 object-contain" width={300} height={200} />
+          <div className="flex flex-col items-center transform transition-all duration-300 hover:scale-105">
+            <Image 
+              src={'/bar-graph.png'} 
+              alt="Bar Graph" 
+              className="h-56 w-auto mb-6 object-contain shadow-2xl rounded-lg hover:shadow-[0_20px_60px_rgba(30,58,138,0.4)]" 
+              width={300} 
+              height={200} 
+            />
             <h2 className="text-xl font-bold">Search Grant Rates By Office</h2>
           </div>
-          <div className="flex flex-col items-center">
-            <Image src={'/pie-chart.png'} alt="Pie Chart" className="h-56 w-auto mb-6 object-contain" width={300} height={200} />
+          <div className="flex flex-col items-center transform transition-all duration-300 hover:scale-105">
+            <Image 
+              src={'/pie-chart.png'} 
+              alt="Pie Chart" 
+              className="h-56 w-auto mb-6 object-contain shadow-2xl rounded-lg hover:shadow-[0_20px_60px_rgba(30,58,138,0.4)]" 
+              width={300} 
+              height={200} 
+            />
             <h2 className="text-xl font-bold">Search Grant Rates By Nationality</h2>
           </div>
-          <div className="flex flex-col items-center">
-            <Image src={'/line-graph.png'} alt="Line Graph" className="h-44 w-auto mb-6 object-contain" width={300} height={160} />
+          <div className="flex flex-col items-center transform transition-all duration-300 hover:scale-105">
+            <Image 
+              src={'/line-graph.png'} 
+              alt="Line Graph" 
+              className="h-44 w-auto mb-6 object-contain shadow-2xl rounded-lg hover:shadow-[0_20px_60px_rgba(30,58,138,0.4)]" 
+              width={300} 
+              height={160} 
+            />
             <h2 className="text-xl font-bold">Search Grant Rates Over Time</h2>
           </div>
         </div>

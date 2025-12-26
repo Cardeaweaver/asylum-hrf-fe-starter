@@ -30,6 +30,7 @@ export const ChoroplethMap = () => {
             type: 'bar',
             orientation: 'h',
             marker: { color: 'rgba(26, 118, 255, 0.8)' },
+            hovertemplate: '<b>%{y}</b><br>Grant Rate: %{x}%<extra></extra>',
           },
         ]}
         layout={{
@@ -48,4 +49,5 @@ export const ChoroplethMap = () => {
       />
     </div>
   );
+
 };

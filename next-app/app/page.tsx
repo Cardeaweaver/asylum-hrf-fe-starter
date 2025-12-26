@@ -27,7 +27,7 @@ function LandingPageContent() {
       {/* 2. GRAPHS PREVIEW SECTION */}
       <section className="py-24 px-6 max-w-7xl mx-auto w-full">
         <div className="flex flex-col md:flex-row justify-around items-end gap-12 mb-12">
-          <div className="flex flex-col items-center transform transition-all duration-300 hover:scale-105">
+          <div className="flex flex-col items-center transform transition-all duration-300 hover:scale-105 cursor-pointer" onClick={() => router.push('/graphs?view=grants')}>
             <Image 
               src={'/bar-graph.png'} 
               alt="Bar Graph" 
@@ -37,7 +37,7 @@ function LandingPageContent() {
             />
             <h2 className="text-xl font-bold">Search Grant Rates By Office</h2>
           </div>
-          <div className="flex flex-col items-center transform transition-all duration-300 hover:scale-105">
+          <div className="flex flex-col items-center transform transition-all duration-300 hover:scale-105 cursor-pointer" onClick={() => router.push('/graphs?view=citizenship')}>
             <Image 
               src={'/pie-chart.png'} 
               alt="Pie Chart" 
@@ -47,7 +47,7 @@ function LandingPageContent() {
             />
             <h2 className="text-xl font-bold">Search Grant Rates By Nationality</h2>
           </div>
-          <div className="flex flex-col items-center transform transition-all duration-300 hover:scale-105">
+          <div className="flex flex-col items-center transform transition-all duration-300 hover:scale-105 cursor-pointer" onClick={() => router.push('/graphs')}>
             <Image 
               src={'/line-graph.png'} 
               alt="Line Graph" 

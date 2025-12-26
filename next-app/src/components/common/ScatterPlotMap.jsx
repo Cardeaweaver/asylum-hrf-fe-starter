@@ -18,6 +18,7 @@ export const ScatterPlot = () => {
             name: 'Grant Rate',
             line: { color: '#3b82f6', width: 3 },
             marker: { color: '#3b82f6', size: 8 },
+            hovertemplate: '<b>Fiscal Year:</b> %{x}<br><b>Grant Rate:</b> %{y:.2f}%<extra></extra>',
           },
         ]}
         layout={{
@@ -35,4 +36,5 @@ export const ScatterPlot = () => {
       />
     </div>
   );
+
 };

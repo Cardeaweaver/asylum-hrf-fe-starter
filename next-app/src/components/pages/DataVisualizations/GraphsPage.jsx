@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useAppContext } from '../../../context/AppContext.jsx';
 import { getMapView, mapTypes } from './getMapView.jsx';
 import { GraphButtons } from '../../common/GraphButtons.jsx';
@@ -8,7 +9,14 @@ import { Loading } from '../../common/Loading.jsx';
 import { getGraphsHeader } from './getGraphsHeader.js';
 
 export const GraphsPage = () => {
-  const [mapView, setMapView] = useState(mapTypes.ScatterPlot);
+  const searchParams = useSearchParams();
+  const viewParam = searchParams.get('view');
+  
+  const initialView = viewParam === 'grants' ? mapTypes.HeatMap 
+                    : viewParam === 'citizenship' ? mapTypes.ChoroplethMap 
+                    : mapTypes.ScatterPlot;
+  
+  const [mapView, setMapView] = useState(initialView);
   const { graphData, isDataLoading } = useAppContext();
 
   if (isDataLoading) return <Loading />;

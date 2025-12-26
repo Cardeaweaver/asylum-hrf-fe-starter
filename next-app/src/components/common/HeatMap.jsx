@@ -27,6 +27,7 @@ export const HeatMap = () => {
             name: 'Grant Rate (%)',
             type: 'bar',
             marker: { color: 'rgba(26, 118, 255, 0.8)' },
+            hovertemplate: '<b>Year:</b> %{x}<br><b>Grant Rate:</b> %{y:.2f}%<extra></extra>',
           },
           {
             x: years,
@@ -34,6 +35,7 @@ export const HeatMap = () => {
             name: 'Denial Rate (%)',
             type: 'bar',
             marker: { color: 'rgba(255, 99, 71, 0.8)' },
+            hovertemplate: '<b>Year:</b> %{x}<br><b>Denial Rate:</b> %{y:.2f}%<extra></extra>',
           },
         ]}
         layout={{
@@ -53,4 +55,5 @@ export const HeatMap = () => {
       />
     </div>
   );
+
 };

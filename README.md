@@ -1,5 +1,7 @@
 # Human Rights First: Asylum Report Generator
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/asylum-hrf-fe-starter)
+
 ## Problem Statement
 The Human Rights First (HRF) organization currently has a limited ability to provide user-friendly insights into their large dataset of asylum case decisions. Existing tools like the TRAC database have significant limitations, such as the inability to visualize trends over time or compare grant rates across different regions. This makes it difficult for journalists, researchers, and the general public (including asylum seekers and activists) to effectively analyze and draw insights from the data.
 

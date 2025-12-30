@@ -4,7 +4,11 @@ import { NavLink } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
 export default function Header() {
-  const { isAuthenticated, isLoading } = useAuth0();
+  const auth0 = useAuth0();
+  
+  // Handle case when Auth0 is not initialized
+  const isAuthenticated = auth0?.isAuthenticated || false;
+  const isLoading = auth0?.isLoading || false;
 
   if (isLoading) {
     return (

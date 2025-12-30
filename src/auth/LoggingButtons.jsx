@@ -4,8 +4,18 @@ import { useAuth0 } from '@auth0/auth0-react';
  * Login/Logout button component that uses Auth0 authentication
  */
 export const LoggingButtons = () => {
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const auth0 = useAuth0();
+  
+  // Handle case when Auth0 is not initialized (e.g., not on localhost)
+  if (!auth0 || typeof auth0.isAuthenticated === 'undefined') {
+    return (
+      <button className='nav-btn px-4 py-1 opacity-50 cursor-not-allowed' disabled>
+        Auth0 Unavailable
+      </button>
+    );
+  }
 
+  const { isAuthenticated, loginWithRedirect, logout } = auth0;
   const buttonText = isAuthenticated ? 'Log Out' : 'Log In';
 
   const handleLogging = async () => {

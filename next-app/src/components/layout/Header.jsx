@@ -13,6 +13,18 @@ export default function Header() {
     setMounted(true);
   }, []);
 
+  const handleLogin = () => {
+    if (loginWithRedirect) {
+      loginWithRedirect();
+    }
+  };
+
+  const handleLogout = () => {
+    if (logout) {
+      logout({ returnTo: window.location.origin });
+    }
+  };
+
   if (!mounted) return null;
 
   return (
@@ -38,18 +50,20 @@ export default function Header() {
           <div className='flex items-center gap-4'>
             <span className='text-sm'>{user?.name || user?.email}</span>
             <button 
-              onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
+              onClick={handleLogout}
               className='bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600 transition-colors'
+              disabled={!logout}
             >
               Logout
             </button>
           </div>
         ) : (
           <button 
-            onClick={() => loginWithRedirect()}
-            className='bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600 transition-colors'
+            onClick={handleLogin}
+            className='bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+            disabled={!loginWithRedirect}
           >
-            Login
+            {loginWithRedirect ? 'Login' : 'Auth0 Unavailable'}
           </button>
         )}
       </nav>

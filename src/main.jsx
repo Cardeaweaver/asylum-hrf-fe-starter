@@ -14,11 +14,24 @@ const AUTH_CLIENT_ID = import.meta.env.VITE_AUTH_CLIENT_ID;
  * - Set the domain, clientId, and authorizationParams
  */
 
+// Check if running on secure origin (localhost or https)
+const isSecureOrigin = 
+  window.location.hostname === 'localhost' || 
+  window.location.hostname === '127.0.0.1' ||
+  window.location.protocol === 'https:';
+
+const shouldUseAuth0 = AUTH_DOMAIN && AUTH_CLIENT_ID && isSecureOrigin;
+
 if (!AUTH_DOMAIN || !AUTH_CLIENT_ID) {
-  console.error('Auth0 configuration missing. Please add VITE_AUTH_DOMAIN and VITE_AUTH_CLIENT_ID to your .env file.');
+  console.warn('Auth0 configuration missing. Running without authentication.');
+}
+
+if (!isSecureOrigin) {
+  console.warn('Not on secure origin. Auth0 disabled. Access via http://localhost for authentication.');
 }
 
 createRoot(document.getElementById('root')).render(
+  shouldUseAuth0 ? (
     <Auth0Provider
       domain={AUTH_DOMAIN}
       clientId={AUTH_CLIENT_ID}
@@ -30,4 +43,9 @@ createRoot(document.getElementById('root')).render(
         <App />
       </ProvideAppContext>
     </Auth0Provider>
+  ) : (
+    <ProvideAppContext>
+      <App />
+    </ProvideAppContext>
+  )
 );
